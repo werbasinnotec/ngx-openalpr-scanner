@@ -1,0 +1,19 @@
+<header>
+    <select (change)="onDeviceSelectChange($event.target.value)">
+        <option value="" [selected]="!currentDevice">No Device Selected</option>
+        <option *ngFor="let device of availableDevices" [value]="device.deviceId" [selected]="currentDevice && device.deviceId === currentDevice.deviceId">{{ device.label }}</option>
+    </select>
+</header>
+
+
+<openalpr-scanner #scanner start="true" [device]="currentDevice" openalprsecret='sk_DEMODEMODEMODEMODEMODEMO' (licencePlate)='licencePlate = $event' (inProgress)='inProgress = $event'></openalpr-scanner>
+
+
+<footer>
+    <span>Result:</span>
+    <span>
+        <em *ngIf="!licencePlate && !inProgress">wating for scan...</em>
+        <em *ngIf="!licencePlate && inProgress">inProgress...</em>
+        <strong>{{ licencePlate }}</strong>
+    </span>
+</footer>
