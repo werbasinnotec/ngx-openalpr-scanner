@@ -270,10 +270,10 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
               const result = JSON.parse(xmlhttp.responseText);
 
               if (result.results && result.results[0]) {
-                this.licencePlate.next(result.results[0].plate);
-              } else {
-                this.licencePlate.next(false);
+                return this.licencePlate.next(result.results[0].plate);
               }
+
+              this.licencePlate.next('');
           }
       }
     }
