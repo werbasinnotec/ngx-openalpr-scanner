@@ -2,7 +2,7 @@
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "@innotec/openalpr-scanner",
   "description": "High-performance Angular 2+ openalpr scanner",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "private": false,
   "ngPackage": {
     "lib": {

@@ -30,6 +30,13 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
   @Input() openalprsecret: string;
   @Input() openalprcountry: string = 'eu';
 
+  @Input()
+  set disable(disable: any) {
+    if (disable) {
+      this.disableCamera();
+    }
+  }
+
   @Output() camerasFound = new EventEmitter<MediaDeviceInfo[]>();
   @Output() permissionResponse = new EventEmitter<boolean>();
   @Output() hasDevices = new EventEmitter<boolean>();
@@ -44,6 +51,7 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
   private isEnumerateDevicesSuported: boolean;
   private videoInputDevices: MediaDeviceInfo[];
   private videoInputDevice: MediaDeviceInfo;
+  private active: boolean;
 
   constructor() {
     this.hasNavigator = typeof navigator !== 'undefined';
@@ -238,8 +246,13 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
     }
   }
 
+  private disableCamera() {
+    stream.getTracks().forEach(function (track) { track.stop(); });
+  }
+
   private scanPlate() {
     this.inProgress.next(true);
+    setTimeout(() => this.active = true, 500);
 
     const video = document.querySelector('video');
     const canvas = document.querySelector('canvas');
@@ -268,6 +281,8 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
               this.inProgress.next(false);
 
               const result = JSON.parse(xmlhttp.responseText);
+
+              this.active = false;
 
               if (result.results && result.results[0]) {
                 return this.licencePlate.next(result.results[0].plate);

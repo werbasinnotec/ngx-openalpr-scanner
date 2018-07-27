@@ -20,6 +20,9 @@ Default is true. Define if the autofocus is enabled
 - @Input() device: MediaDeviceInfo;
 Input the device what you want to use. Getting devices via camerasFound Output.
 
+- @Input() disableCamera: boolean;
+Input an event when the camera will disable
+
 - @Input() openalprsecret: string;
 The secret for the openalpr api.
 
