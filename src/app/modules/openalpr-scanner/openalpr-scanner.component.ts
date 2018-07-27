@@ -297,6 +297,7 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
   }
 
   ngOnDestroy(): void {
+    this.disableCamera();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
