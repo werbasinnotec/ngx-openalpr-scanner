@@ -6,12 +6,12 @@
   position: relative;
 }
 
-video {
+video, canvas {
   width: 100%;
   height: 100%;
 }
 
-button {
+button, .progress {
   position: absolute;
   z-index: 500;
   color: white;

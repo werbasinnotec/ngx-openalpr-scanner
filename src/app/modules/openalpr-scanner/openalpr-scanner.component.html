@@ -1,9 +1,11 @@
 <div class='openalpr_content'>
   <button (click)='scanPlate()' *ngIf='!active'>SCAN</button>
-  <video #preview>
+  <div class='progress' *ngIf='active'> Please Wait... </div>
+
+  <video #preview *ngIf='!active'>
       <p>
           Your browser does not support this feature, please try to upgrade it.
       </p>
   </video>
-  <canvas [hidden]='true'></canvas>
+  <canvas [hidden]='!active'></canvas>
 </div>

@@ -252,7 +252,6 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
 
   private scanPlate() {
     this.inProgress.next(true);
-    setTimeout(() => this.active = true, 500);
 
     const video = document.querySelector('video');
     const canvas = document.querySelector('canvas');
@@ -261,7 +260,8 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
     canvas.height = video.videoHeight;
 
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-
+    this.disableCamera();
+    this.active = true
     this.sendOpenALPR(canvas.toDataURL().split('data:image/png;base64,')[1]);
   }
 
@@ -281,8 +281,6 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
               this.inProgress.next(false);
 
               const result = JSON.parse(xmlhttp.responseText);
-
-              this.active = false;
 
               if (result.results && result.results[0]) {
                 return this.licencePlate.next(result.results[0].plate);
