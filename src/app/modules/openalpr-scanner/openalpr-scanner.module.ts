@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OpenALPRScanner } from './openalpr-scanner.component';
 
-export type OpenALPRScanner = OpenALPRScanner;
-
 @NgModule({
     imports: [
         CommonModule,
