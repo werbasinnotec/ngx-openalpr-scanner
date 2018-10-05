@@ -2,7 +2,7 @@
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "@innotec/openalpr-scanner",
   "description": "High-performance Angular 2+ openalpr scanner",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": false,
   "ngPackage": {
     "lib": {
@@ -73,5 +73,8 @@
   "module": "dist/esm5/zxing-ngx-scanner.js",
   "es2015": "dist/esm2015/zxing-ngx-scanner.js",
   "typings": "dist/zxing-ngx-scanner.d.ts",
-  "metadata": "dist/zxing-ngx-scanner.metadata.json"
+  "metadata": "dist/zxing-ngx-scanner.metadata.json",
+  "dependencies": {
+    "@zxing/library": "0.8.3"
+  }
 }

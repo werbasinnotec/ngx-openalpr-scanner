@@ -29,6 +29,7 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
   @Input() device: MediaDeviceInfo;
   @Input() openalprsecret: string;
   @Input() openalprcountry: string = 'eu';
+  @Input() openalprstate: string = 'fr';
 
   @Input()
   set disable(disable: any) {
@@ -271,7 +272,10 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
 
   private sendOpenALPR(file: any) {
     const xmlhttp = new XMLHttpRequest();
-    const requestUrl = 'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=' + this.openalprcountry + ',&secret_key=' + this.openalprsecret + '&return_image=false';
+
+    const requestUrl = 'https://api.openalpr.com/v2/recognize_bytes?secret_key=' + this.openalprsecret + '&recognize_vehicle=0&country=' + this.openalprcountry + '&state=' + this.openalprstate + '&return_image=0&topn=10';
+
+    // const requestUrl = 'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&state=fr&country=' + this.openalprcountry + ',&secret_key=' + this.openalprsecret + '&return_image=0&topn=10';
 
     xmlhttp.open('POST', requestUrl, true);
 
@@ -287,6 +291,8 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
               }
 
               this.licencePlate.next('');
+          } else {
+            this.licencePlate.next('Error');
           }
       }
     }
