@@ -46,13 +46,14 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
   @Output() licencePlate = new EventEmitter<any>();
   @Output() inProgress = new EventEmitter<any>();
 
-  private hasNavigator: boolean;
-  private isMediaDevicesSuported: boolean;
-  private hasPermission: boolean;
-  private isEnumerateDevicesSuported: boolean;
-  private videoInputDevices: MediaDeviceInfo[];
-  private videoInputDevice: MediaDeviceInfo;
-  private active: boolean;
+  public hasNavigator: boolean;
+  public isMediaDevicesSuported: boolean;
+  public hasPermission: boolean;
+  public isEnumerateDevicesSuported: boolean;
+  public videoInputDevices: MediaDeviceInfo[];
+  public videoInputDevice: MediaDeviceInfo;
+  public active: boolean;
+  public error: boolean
 
   constructor() {
     this.hasNavigator = typeof navigator !== 'undefined';
@@ -60,7 +61,7 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
     this.isEnumerateDevicesSuported = !!(this.isMediaDevicesSuported && navigator.mediaDevices.enumerateDevices);
   }
 
-  private setPermission(hasPermission: boolean | null) {
+  public setPermission(hasPermission: boolean | null) {
     this.hasPermission = hasPermission;
     this.permissionResponse.next(hasPermission);
 
@@ -78,7 +79,7 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
     this.previewElemRef.nativeElement.srcObject = stream;
   }
 
-  private handlePermissionException(err: DOMException) : any {
+  public handlePermissionException(err: DOMException) : any {
     let permission: boolean;
 
     switch (err.name) {
@@ -129,7 +130,7 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
     }
   }
 
-  private set _hasDevices(hasDevice: boolean) {
+  public set _hasDevices(hasDevice: boolean) {
     this.hasDevices.next(hasDevice);
   }
 
@@ -171,7 +172,7 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
     return permission;
   }
 
-  private async enumarateVideoDevices(): Promise<MediaDeviceInfo[]> {
+  public async enumarateVideoDevices(): Promise<MediaDeviceInfo[]> {
     if (!this.hasNavigator) {
         console.error('openalpr-scanner', 'enumarateVideoDevices', 'Can\'t enumerate devices, navigator is not present.');
         return;
@@ -247,11 +248,11 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
     }
   }
 
-  private disableCamera() {
+  public disableCamera() {
     stream.getTracks().forEach(function (track) { track.stop(); });
   }
 
-  private scanPlate() {
+  public scanPlate() {
     this.inProgress.next(true);
 
     const video = document.querySelector('video');
@@ -270,7 +271,7 @@ export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
     return this.videoInputDevices.find(device => device.deviceId === deviceId);
   }
 
-  private sendOpenALPR(file: any) {
+  public sendOpenALPR(file: any) {
     const xmlhttp = new XMLHttpRequest();
 
     const requestUrl = 'https://api.openalpr.com/v2/recognize_bytes?secret_key=' + this.openalprsecret + '&recognize_vehicle=0&country=' + this.openalprcountry + '&state=' + this.openalprstate + '&return_image=0&topn=10';
