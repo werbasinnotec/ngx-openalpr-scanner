@@ -1,5 +1,4 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OpenALPRScanner } from './openalpr-scanner.component';
@@ -7,8 +6,7 @@ import { OpenALPRScanner } from './openalpr-scanner.component';
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
-        HttpModule 
+        FormsModule
     ],
     declarations: [ OpenALPRScanner ],
     exports: [ OpenALPRScanner ],

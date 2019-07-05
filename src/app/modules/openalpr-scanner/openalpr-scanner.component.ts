@@ -23,7 +23,7 @@ let stream: MediaStream;
 })
 
 export class OpenALPRScanner implements AfterViewInit, OnDestroy, OnChanges {
-  @ViewChild('preview') previewElemRef: ElementRef;
+  @ViewChild('preview', { static: false }) previewElemRef: ElementRef;
 
   @Input() autofocusEnabled = true;
   @Input() device: MediaDeviceInfo;

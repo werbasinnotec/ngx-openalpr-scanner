@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
     ngVersion = VERSION.full;
 
-    @ViewChild('scanner')
+    @ViewChild('scanner', { static: true })
     scanner: OpenALPRScanner;
 
     hasDevices: boolean;
