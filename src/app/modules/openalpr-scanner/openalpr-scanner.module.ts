@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OpenALPRScanner } from './openalpr-scanner.component';
@@ -13,7 +13,7 @@ import { OpenALPRScanner } from './openalpr-scanner.component';
 })
 
 export class OpenALPRScannerModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot() {
         return {
             ngModule: OpenALPRScannerModule
         };
